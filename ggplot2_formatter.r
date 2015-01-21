@@ -22,30 +22,36 @@ require(scales)
 #' ggplot2 + scale_y_continuous(labels = human_numbers)
 #' ggplot2 + scale_x_continuous(labels = human_numbers)
 
-human_numbers <- function(x, smbl = ""){
-    humanity <- function(y){             
-        
-        if (!is.na(y)){
-        
-            b <- round_any(y / 1000000000, 0.1)
-            m <- round_any(y / 1000000, 0.1)
-            k <- round_any(y / 1000, 0.1)
-            
-            if ( y >= 0 ){ 
-                y_is_positive <- ""
-            } else {
-                y_is_positive <- "-"
-            }
-                    
-            if  ( m < 1){
-                paste (y_is_positive, smbl,  k , "k", sep = "")
-            } else if (b < 1){
-                paste (y_is_positive, smbl, m ,"m", sep = "")
-            } else {
-                paste (y_is_positive, smbl,  comma(b), "b", sep = "")    
-            }
-        }
-    }
+human_numbers <- function(x = NULL, smbl =""){
+  humanity <- function(y){             
     
-   sapply(x,humanity)
+    if (!is.na(y)){
+      
+      b <- round_any(y / 1000000000, 0.1)
+      m <- round_any(y / 1000000, 0.1)
+      k <- round_any(y / 1000, 0.1)
+      
+      if ( y >= 0 ){ 
+        y_is_positive <- ""
+      } else {
+        y_is_positive <- "-"
+      }
+      
+      if  ( m < 1){
+        paste (y_is_positive, smbl,  k , "k", sep = "")
+      } else if (b < 1){
+        paste (y_is_positive, smbl, m ,"m", sep = "")
+      } else {
+        paste (y_is_positive, smbl,  comma(b), "b", sep = "")    
+      }
+    }
+  }
+  
+  sapply(x,humanity)
 }
+
+#' Human versions of large currency numbers - extensible via smbl
+
+human_gdp   <- function(x){human_numbers(x, smbl = "£")}
+human_usd   <- function(x){human_numbers(x, smbl = "$")}
+human_euro  <- function(x){human_numbers(x, smbl = "€")} 
