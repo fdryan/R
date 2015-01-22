@@ -21,7 +21,7 @@ require(scales)
 #' human_numbers(c(1.200000e+05, -2.154660e+05, 2.387790e+05, 4.343500e+04 ,5.648675e+12), "$")
 #' ggplot2 + scale_y_continuous(labels = human_numbers)
 #' ggplot2 + scale_x_continuous(labels = human_numbers)
-#' ggplot2 + scale_x_continuous(labels = human_gdp)
+#' ggplot2 + scale_x_continuous(labels = human_gbp)
 
 human_numbers <- function(x = NULL, smbl =""){
   humanity <- function(y){             
@@ -53,6 +53,6 @@ human_numbers <- function(x = NULL, smbl =""){
 
 #' Human versions of large currency numbers - extensible via smbl
 
-human_gdp   <- function(x){human_numbers(x, smbl = "£")}
+human_gbp   <- function(x){human_numbers(x, smbl = "£")}
 human_usd   <- function(x){human_numbers(x, smbl = "$")}
 human_euro  <- function(x){human_numbers(x, smbl = "€")} 
