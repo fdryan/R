@@ -21,6 +21,7 @@ require(scales)
 #' human_numbers(c(1.200000e+05, -2.154660e+05, 2.387790e+05, 4.343500e+04 ,5.648675e+12), "$")
 #' ggplot2 + scale_y_continuous(labels = human_numbers)
 #' ggplot2 + scale_x_continuous(labels = human_numbers)
+#' ggplot2 + scale_x_continuous(labels = human_gdp)
 
 human_numbers <- function(x = NULL, smbl =""){
   humanity <- function(y){             
