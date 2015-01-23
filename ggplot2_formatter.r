@@ -56,3 +56,4 @@ human_numbers <- function(x = NULL, smbl =""){
 human_gbp   <- function(x){human_numbers(x, smbl = "£")}
 human_usd   <- function(x){human_numbers(x, smbl = "$")}
 human_euro  <- function(x){human_numbers(x, smbl = "€")} 
+human_num   <- function(x){human_numbers(x, smbl = "")} 
