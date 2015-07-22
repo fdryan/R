@@ -28,9 +28,9 @@ human_numbers <- function(x = NULL, smbl =""){
     
     if (!is.na(y)){
       
-      b <- round_any(y / 1000000000, 0.1)
-      m <- round_any(y / 1000000, 0.1)
-      k <- round_any(y / 1000, 0.1)
+       b <- round_any(abs(y) / 1000000000, 0.1)
+       m <- round_any(abs(y) / 1000000, 0.1)
+       k <- round_any(abs(y) / 1000, 0.1)
       
       if ( y >= 0 ){ 
         y_is_positive <- ""
