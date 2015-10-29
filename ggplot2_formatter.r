@@ -39,7 +39,7 @@ human_numbers <- function(x = NULL, smbl =""){
       }
       
       if ( k < 1 ) {
-        paste0( smbl, y )
+        paste0(y_is_positive, smbl, y )
         } else if ( m < 1){
         paste0 (y_is_positive, smbl,  k , "k")
       } else if (b < 1){
