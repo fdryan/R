@@ -28,9 +28,9 @@ human_numbers <- function(x = NULL, smbl =""){
     
     if (!is.na(y)){
       
-       b <- round_any(abs(y) / 1000000000, 0.1)
-       m <- round_any(abs(y) / 1000000, 0.1)
-       k <- round_any(abs(y) / 1000, 0.1)
+       b <- round_any(abs(y) / 1e9, 0.1)
+       m <- round_any(abs(y) / 1e6, 0.1)
+       k <- round_any(abs(y) / 1e3, 0.1)
       
       if ( y >= 0 ){ 
         y_is_positive <- ""
@@ -38,12 +38,14 @@ human_numbers <- function(x = NULL, smbl =""){
         y_is_positive <- "-"
       }
       
-      if  ( m < 1){
-        paste (y_is_positive, smbl,  k , "k", sep = "")
+      if ( k < 1 ) {
+        paste0( smbl, y )
+        } else if ( m < 1){
+        paste0 (y_is_positive, smbl,  k , "k")
       } else if (b < 1){
-        paste (y_is_positive, smbl, m ,"m", sep = "")
+        paste0 (y_is_positive, smbl, m ,"m")
       } else {
-        paste (y_is_positive, smbl,  comma(b), "b", sep = "")    
+        paste0 (y_is_positive, smbl,  comma(b), "b")     
       }
     }
   }
