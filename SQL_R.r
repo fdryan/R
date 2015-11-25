@@ -1,6 +1,28 @@
 
-# ---------------------------------------------------------------------------------------------
-#'
+# Function Definitions ------------------------------------------------------------------------
+
+# returns string w/o leading whitespace
+
+	trim.leading <- function (x)  sub("^\\s+", "", x)
+
+# returns string w/o trailing whitespace
+	trim.trailing <- function (x) sub("\\s+$", "", x)
+
+# returns string w/o leading or trailing whitespace
+	trim <- function (x) gsub("^\\s+|\\s+$", "", x)
+
+# If you want to read in a SQL file from the working directory
+
+	read.sql <- function(filename, silent = TRUE) {
+		q <- readLines(filename, warn = !silent)
+		q <- q[!grepl(pattern = "^\\s*--", x = q)] # remove full-line comments
+		q <- sub(pattern = "--.*", replacement="", x = q) # remove midline comments
+		q <- paste(q, collapse = " ")
+		return(q)
+	}
+
+
+#' SQLQry
 #' sqlQry(sqlString, execute = F, connection = conn,  view = F, csv = NULL, output.dir = "output/)
 #'
 #' A versatile function for working with SQL in R.
@@ -20,13 +42,15 @@
 #' @execute Boolean run SQL or not
 #' @connection a database connection object
 #' @view Boolean Optional choice to immediatly View() the results of the staments
+#' @index subset a sql file but specifying the queries you want to run by their index
 #' @csv Optional string or vector containing file names to use to save results of queries to csv
 #' @output.dir Location to save CSV results. Default is Output directory within wd()
-# ---------------------------------------------------------------------------------------------
+
     sqlQry <- function(sqlString,
                        execute = FALSE,
                        view = FALSE,
-                       connection = conn,                       
+                       index = NULL, 
+                       connection = conn,
                        csv = NULL,
                        output.dir = "output/"){
         sqlString <- str_trim(sqlString)
@@ -40,6 +64,10 @@
         }
 
         sqlString <- strsplit(sqlString, ";")[[1]]
+        
+        if(!is.null(index)){
+            sqlString <- sqlString[index]
+        }
 
         if (execute == TRUE){
             data.out <- list()
